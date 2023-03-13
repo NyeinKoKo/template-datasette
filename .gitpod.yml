@@ -1,13 +1,18 @@
 ports:
   - port: 3000
-    onOpen: open-preview
+    onOpen: open-browser
+    visibility: private
 
 tasks:
-  - init: |
+  - name: Terminal 1
+    before: echo "hello"
+    init: |
       ./install.sh
     command: |
       sudo apt-get install entr
       ls *.csv *.json *.sh | entr -r ./start.sh
+   - name: Terminal 2
+     init: echo "hi, from terminal 2!"
 
 vscode:
   extensions:
